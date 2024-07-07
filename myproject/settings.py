@@ -80,8 +80,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'home.context_processors.account_context',
-                # 'home.context_processors.product_view',
-                # 'home.context_processors.check_user',
+                'home.context_processors.product_view',
+                'home.context_processors.check_user',
               
             ],
         },

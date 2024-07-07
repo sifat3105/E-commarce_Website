@@ -1,0 +1,49 @@
+<div class="main-categori-wrap d-none d-lg-block">
+    <a class="categori-button-active" href="#">
+        <span class="fi-rs-apps"></span> Browse Categories
+    </a>
+    <div class="categori-dropdown-wrap categori-dropdown-active-large">
+        <ul>
+            {% for cat in categories %}
+            <li class="has-children">
+                <a href="shop-grid-right.html"><i class="evara-font-dress"></i>{{ cat.name }}</a>
+                <div class="dropdown-menu">
+                    <ul class="mega-menu d-lg-flex">
+                        <li class="mega-menu-col col-lg-7">
+                            <ul class="d-lg-flex">
+                                <li class="mega-menu-col col-lg-6">
+                                    <ul>
+                                        <li><span class="submenu-title">Hot & Trending</span></li>
+                                        {% for sub in cat.subcategories.all %}
+                                        <li><a class="dropdown-item nav-link nav_item" href="#">{{ sub.name }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="mega-menu-col col-lg-5">
+                            <div class="header-banner2">
+                                <img src="{% static 'assets/imgs/banner/menu-banner-2.jpg' %}" alt="menu_banner1">
+                                <div class="banne_info">
+                                    <h6>10% Off</h6>
+                                    <h4>New Arrival</h4>
+                                    <a href="#">Shop now</a>
+                                </div>
+                            </div>
+                            <div class="header-banner2">
+                                <img src="{% static 'assets/imgs/banner/menu-banner-3.jpg' %}" alt="menu_banner2">
+                                <div class="banne_info">
+                                    <h6>15% Off</h6>
+                                    <h4>Hot Deals</h4>
+                                    <a href="#">Shop now</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="more_categories">Show more...</div>
+    </div>
+</div>

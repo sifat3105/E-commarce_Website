@@ -1,0 +1,50 @@
+<!-- create_deal.html -->
+{% extends 'base/base.html' %}
+
+{% block title %}Create Deal{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Create Deal</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Title</label>
+                {{ form.title }}
+            </div>
+            <div class="mb-3">
+                <label for="id_subtitle" class="form-label">Subtitle</label>
+                {{ form.subtitle }}
+            </div>
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Description</label>
+                {{ form.title }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image</label>
+                {{ form.image }}
+            </div>
+            <div class="mb-3">
+                <label for="id_new_price" class="form-label">New Price</label>
+                {{ form.new_price }}
+            </div>
+            <div class="mb-3">
+                <label for="id_old_price" class="form-label">Old Price</label>
+                {{ form.old_price }}
+            </div>
+            <div class="mb-3">
+                <label for="id_countdown_end" class="form-label">Countdown End</label>
+                {{ form.countdown_end }}
+            </div>
+            <div class="mb-3">
+                <label for="id_product_link" class="form-label">Product Link</label>
+                {{ form.product_link }}
+            </div>
+            <div class="mb-3">
+                <label for="id_shop_link" class="form-label">Shop Link</label>
+                {{ form.shop_link }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

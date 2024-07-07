@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Creation Dashboard{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Creation Dashboard</h2>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="{% url 'create_product' %}" class="btn btn-sm btn-primary">Create Product</a>
+            <a href="{% url 'create_banner' %}" class="btn btn-sm btn-primary">Create Banner</a>
+            <a href="{% url 'create_banner2' %}" class="btn btn-sm btn-primary">Create Banner 2</a>
+            <a href="{% url 'create_deal' %}" class="btn btn-sm btn-primary">Create Deal</a>
+            <a href="{% url 'create_featured_brand' %}" class="btn btn-sm btn-primary">Create Featured Brand</a>
+        </div>
+    </div>
+{% endblock %}

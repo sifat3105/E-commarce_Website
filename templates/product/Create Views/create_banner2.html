@@ -1,0 +1,31 @@
+<!-- create_banner2.html -->
+{% extends 'base/base.html' %}
+
+{% block title %}Create Banner 2{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Create Banner 2</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+           
+            <div class="mb-3">
+                <label for="id_small_title" class="form-label">Small Title</label>
+                {{ form.small_title }}
+            </div>
+            <div class="mb-3">
+                <label for="id_small_title" class="form-label">Large Title</label>
+                {{ form.large_title }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image</label>
+                {{ form.image }}
+            </div>
+            <div class="mb-3">
+                <label for="id_button_link" class="form-label">Button Link</label>
+                {{ form.button_link }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

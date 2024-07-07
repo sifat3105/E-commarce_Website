@@ -1,0 +1,13 @@
+<!-- success.html -->
+{% extends 'base/base.html' %}
+
+{% block title %}Success{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Success</h2>
+        <p>Your form has been submitted successfully!</p>
+        <a href="{% url 'creation_dashboard_view' %}" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+    
+{% endblock %}

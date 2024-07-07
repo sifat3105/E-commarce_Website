@@ -1,6 +1,6 @@
 from django.urls import reverse
 from Auth_App.models import profile
-# from product.models import Category, Product
+from Product.models import Category, Product
 
 def account_context(request):
     # categories = Category.objects.all()
@@ -21,3 +21,14 @@ def account_context(request):
         # 'categories': categories
     }
     
+def product_view(request):
+    products = Product.objects.all()
+    return{'products': products}
+
+def check_user(request):
+    if request.user.is_authenticated:
+        user = request.user
+        if user.is_superuser or user.is_staff:
+            creation_dashboard = 'Creation Dashboard'
+            creation_dashboard_link = reverse('creation_dashboard_view')
+    return locals()

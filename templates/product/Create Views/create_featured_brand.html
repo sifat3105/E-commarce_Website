@@ -1,0 +1,22 @@
+<!-- create_featured_brand.html -->
+{% extends 'base/base.html' %}
+
+{% block title %}Create Featured Brand{% endblock %}
+
+{% block content %}
+    <div class=" container mt-5">
+        <h2>Create Featured Brand</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Name</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Logo Image</label>
+                {{ form.image }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}

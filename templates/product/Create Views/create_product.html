@@ -1,0 +1,94 @@
+<!-- create_product.html -->
+{% extends 'base/base.html' %}
+
+{% block title %}Create Product{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Create Product</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_name" class="form-label">Name</label>
+                {{ form.name }}
+            </div>
+            <div class="mb-3">
+                <label for="id_description" class="form-label">Description</label>
+                {{ form.description }}
+            </div>
+            <div class="mb-3">
+                <label for="id_price" class="form-label">Price</label>
+                {{ form.price }}
+            </div>
+            <div class="mb-3">
+                <label for="id_old_price" class="form-label">Old Price</label>
+                {{ form.old_price }}
+            </div>
+            <div class="mb-3">
+                <label for="id_discount" class="form-label">Discount</label>
+                {{ form.discount }}
+            </div>
+            <div class="mb-3">
+                <label for="id_brand" class="form-label">Brand</label>
+                {{ form.brand }}
+            </div>
+            <div class="mb-3">
+                <label for="id_warranty" class="form-label">Warranty</label>
+                {{ form.warranty }}
+            </div>
+            <div class="mb-3">
+                <label for="id_sku" class="form-label">SKU</label>
+                {{ form.sku }}
+            </div>
+            <div class="mb-3">
+                <label for="id_quantity" class="form-label">Quantity</label>
+                {{ form.quantity }}
+            </div>
+            <div class="mb-3">
+                <label for="id_category" class="form-label">Category</label>
+                {{ form.category }}
+            </div>
+            <div class="mb-3">
+                <label for="id_subcategory" class="form-label">Subcategory</label>
+                <select name="subcategory" id="id_subcategory" class="form-select">
+                    {% for category in categories %}
+                    <optgroup label="{{ category.name }}">
+                        {% for subcategory in category.subcategories.all %}
+                        <option value="{{ subcategory.id }}">{{ subcategory.name }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image</label>
+                {{ form.image }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image2" class="form-label">Image 2</label>
+                {{ form.image2 }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image3" class="form-label">Image 3</label>
+                {{ form.image3 }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image4" class="form-label">Image 4</label>
+                {{ form.image4 }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image5" class="form-label">Image 5</label>
+                {{ form.image5 }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image6" class="form-label">Image 6</label>
+                {{ form.image6 }}
+            </div>
+            <div class="mb-3">
+                <label for="id_image7" class="form-label">Image 7</label>
+                {{ form.image7 }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
