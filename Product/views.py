@@ -38,8 +38,11 @@ def banner_create_view(request):
     if request.method == 'POST':
         form = BannerForm(request.POST, request.FILES)
         if form.is_valid():
+            print ('is it okay')
             form.save()
-            return redirect('success')  # Redirect to a success page or another page
+            return redirect('success') 
+        else:
+            print('it  not okay')
     else:
         form = BannerForm()
     return render(request, 'product/Create Views/create_banner.html', {'form': form})
