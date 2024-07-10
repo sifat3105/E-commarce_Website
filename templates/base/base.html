@@ -42,7 +42,7 @@
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-2.jpg' %}" alt="product image">
+                                    <img src="{{ product.image.url }}" alt="product image">
                                 </figure>
                                 <figure class="border-radius-10">
                                     <img src="{% static 'assets/imgs/shop/product-16-1.jpg' %}" alt="product image">
@@ -65,7 +65,7 @@
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails pl-15 pr-15">
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-3.jpg' %}" alt="product image"></div>
+                                <div><img src="{{ product.image.url }}" alt="product image"></div>
                                 <div><img src="{% static 'assets/imgs/shop/thumbnail-4.jpg' %}" alt="product image"></div>
                                 <div><img src="{% static 'assets/imgs/shop/thumbnail-5.jpg' %}" alt="product image"></div>
                                 <div><img src="{% static 'assets/imgs/shop/thumbnail-6.jpg' %}" alt="product image"></div>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="detail-info">
-                            <h3 class="title-detail mt-30">Colorful Pattern Shirts HD450</h3>
+                            <h3 class="title-detail mt-30">{{ product.name}}</h3>
                             <div class="product-detail-rating">
                                 <div class="pro-details-brand">
                                     <span> Brands: <a href="shop-grid-right.html">Bootstrap</a></span>
@@ -102,8 +102,8 @@
                             </div>
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
-                                    <ins><span class="text-brand">$120.00</span></ins>
-                                    <ins><span class="old-price font-md ml-15">$200.00</span></ins>
+                                    <ins><span class="text-brand">${{ product.price}}</span></ins>
+                                    <ins><span class="old-price font-md ml-15">${{ product.old_price}}</span></ins>
                                     <span class="save-price  font-md color3 ml-15">25% Off</span>
                                 </div>
                             </div>
@@ -162,9 +162,7 @@
 </div>
 
 
-{% block quick_view %}
 
-{% endblock quick_view %}
     
     <header class="header-area header-style-1 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
@@ -246,7 +244,7 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Evara" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}">
-                                        <span class="pro-count blue">2</span>
+                                        <span class="pro-count blue">{{total_cart_item}}</span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
@@ -267,7 +265,7 @@
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>${{total}}</span></h4>
+                                                <h4>Total <span>${{total_product_price}}</span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
                                                 <a href="{% url 'cart' %}" class="outline">View cart</a>

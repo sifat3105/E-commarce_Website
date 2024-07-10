@@ -21,7 +21,7 @@
                             <h5>Limited quantities.</h5>
                         </div>
                         <div class="deal-content">
-                            <h6 class="product-title"><a href="{% url 'right_product_view' product.uuid %}">Summer Collection New Morden Design</a></h6>
+                            <h6 class="product-title"><a href="#">Summer Collection New Morden Design</a></h6>
                             <div class="product-price"><span class="new-price">$139.00</span><span class="old-price">$160.99</span></div>
                         </div>
                         <div class="deal-bottom">
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="product-action-1">
                                     <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{% url 'add_to_wishlist' product.id %}"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
@@ -170,10 +170,10 @@
                                 </div>
                                 <div class="product-price">
                                     <span>${{ product.price}} </span>
-                                    <span class="old-price">${{ product.price}}</span>
+                                    <span class="old-price">${{ product.old_price}}</span>
                                 </div>
                                 <div class="product-action-1 show">
-                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="{% url 'add_to_cart' product.id %}"><i class="fi-rs-shopping-bag-add"></i></a>
                                 </div>
                             </div>
                         </div>
