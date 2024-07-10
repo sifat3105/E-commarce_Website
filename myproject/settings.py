@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Auth_App',
     'Account_Dashboard',
     'Product',
+    'cart_and_check_out',
 ]
 
 JAZZMIN_SETTINGS = {
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'home.context_processors.account_context',
                 'home.context_processors.product_view',
                 'home.context_processors.check_user',
+                'cart_and_check_out.context_processors.popup_cart',
               
             ],
         },

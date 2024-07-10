@@ -21,7 +21,7 @@
                             <h5>Limited quantities.</h5>
                         </div>
                         <div class="deal-content">
-                            <h6 class="product-title"><a href="shop-product-right.html">Summer Collection New Morden Design</a></h6>
+                            <h6 class="product-title"><a href="{% url 'right_product_view' product.uuid %}">Summer Collection New Morden Design</a></h6>
                             <div class="product-price"><span class="new-price">$139.00</span><span class="old-price">$160.99</span></div>
                         </div>
                         <div class="deal-bottom">
@@ -162,7 +162,7 @@
                                 <div class="product-category">
                                     <a href="shop-grid-right.html">{{ product.subcategory}}</a>
                                 </div>
-                                <h2><a href="shop-product-right.html">{{ product.name}}</a></h2>
+                                <h2><a href="{% url 'right_product_view' product.uuid %}">{{ product.name}}</a></h2>
                                 <div class="rating-result" title="90%">
                                     <span>
                                         <span>90%</span>

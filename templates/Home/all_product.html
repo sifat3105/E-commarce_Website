@@ -70,7 +70,7 @@
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html">
+                                        <a href="{% url 'right_product_view' product.uuid %}">
                                             <img class="default-img" src="{{ product.image.url }}" alt="">
                                             <img class="hover-img" src="{{ product.image.url }}" alt="">
                                         </a>
@@ -89,7 +89,7 @@
                                     <div class="product-category">
                                         <a href="shop-grid-right.html">{{ product.subcategory }}</a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">{{ product.name }}</a></h2>
+                                    <h2><a href="{% url 'right_product_view' product.uuid %}">{{ product.name }}</a></h2>
                                     <div class="rating-result" title="90%">
                                         <span>
                                             <span>90%</span>
@@ -100,7 +100,7 @@
                                         <span class="old-price">${{ product.price}}</span>
                                     </div>
                                     <div class="product-action-1 show">
-                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="{% url 'add_to_cart' product.id %}" onclick="document.getElementById('add-to-cart').submit(); return false;" method="post"><i class="fi-rs-shopping-bag-add"></i></a>
                                     </div>
                                 </div>
                             </div>
