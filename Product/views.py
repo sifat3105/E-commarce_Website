@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Category, SubCategory
 from .utils import convert_to_16_9
 from .forms import BannerForm, Banner2Form, DealForm, FeaturedBrandForm, ProductForm
@@ -13,7 +13,7 @@ def create_product(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('success')  # Redirect to a success page or another page
+            return redirect('home')  # Redirect to a success page or another page
     else:
         form = ProductForm()
     return render(request, 'product/Create Views/create_product.html', {'form': form})
@@ -26,9 +26,9 @@ def product_view(request):
 
 
 def right_product_view(request , uuid):
-    product = Product.objects.get(uuid = uuid)
+    product = get_object_or_404(Product, uuid = uuid)
 
-    return render(request, 'product/right_product_view.html', {'product':product})
+    return render(request, 'product/full_product_view.html', {'product':product})
 
 
 

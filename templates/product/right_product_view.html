@@ -126,7 +126,7 @@
                                         <div class="product-price primary-color float-left">
                                             <ins><span class="text-brand">${{ product.price }}</span></ins>
                                             <ins><span class="old-price font-md ml-15">${{ product.old_price }}</span></ins>
-                                            <span class="save-price  font-md color3 ml-15">2{{ product.discount }}% Off</span>
+                                            <span class="save-price  font-md color3 ml-15">{{ product.discount }}% Off</span>
                                         </div>
                                     </div>
                                     <div class="bt-1 border-color-1 mt-15 mb-15"></div>
@@ -170,9 +170,7 @@
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <form action="{% url 'add_to_cart' product.id %}">
-                                            <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                        </form>
+                                            <button type="button" class="button button-add-to-cart" onclick="location.href='{% url 'add_to_cart' product.id %}'">Add to cart</button>
                                             <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                         </div>

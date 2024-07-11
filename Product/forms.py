@@ -4,7 +4,7 @@ from .models import Banner, Banner_2, Deal, FeaturedBrand, Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['name', 'description', 'price', 'old_price', 'brand', 'warranty', 'sku', 'quantity', 'category', 'subcategory', 'image', 'image2', 'image3', 'image4', 'image5', 'image6', 'image7']
 
 class BannerForm(forms.ModelForm):
     class Meta:

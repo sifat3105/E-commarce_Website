@@ -42,8 +42,23 @@ class Product(models.Model):
     image5 = models.ImageField(upload_to='products/', blank=True, null=True)
     image6 = models.ImageField(upload_to='products/', blank=True, null=True)
     image7 = models.ImageField(upload_to='products/', blank=True, null=True)
+    rating = models.PositiveIntegerField( null=True, blank=True)
+    num_reviews = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def discount_percentage(self, *args, **kwargs):
+        if self.old_price != 0:
+            discount = self.old_price - self.price
+            self.discount = round((discount / self.old_price) * 100)
+        else:
+            self.discount = 0
+        super().save(*args, **kwargs)
+        
+    def save(self, *args, **kwargs):
+        rate = 5-
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.name

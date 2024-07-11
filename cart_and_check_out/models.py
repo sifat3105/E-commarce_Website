@@ -18,7 +18,6 @@ class CartItem(models.Model):
     added_at = models.DateTimeField(default=timezone.now)
     
     def save(self, *args, **kwargs):
-        # Calculate the subtotal as a Decimal
         self.subtotal =(self.product.price)* self.quantity
         super().save(*args, **kwargs)
 

@@ -72,7 +72,9 @@
                                     <div class="product-img product-img-zoom">
                                         <a href="{% url 'right_product_view' product.uuid %}">
                                             <img class="default-img" src="{{ product.image.url }}" alt="">
-                                            <img class="hover-img" src="{{ product.image.url }}" alt="">
+                                            {% if product.image2 %}
+                                            <img class="hover-img" src="{{ product.image2.url }}" alt="">
+                                            {% endif %}
                                         </a>
                                     </div>
                                     <div class="product-action-1">
@@ -108,7 +110,7 @@
                         {% endfor %}
                     </div>
                     <!--pagination-->
-                    <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                    {% comment %} <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">
                                 <li class="page-item active"><a class="page-link" href="#">01</a></li>
@@ -119,7 +121,7 @@
                                 <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </div>

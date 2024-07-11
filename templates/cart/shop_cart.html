@@ -34,7 +34,7 @@
                                 <tr>
                                     <td class="image product-thumbnail"><img src="{{ item.product.image.url}}" alt="#"></td>
                                     <td class="product-des product-name">
-                                        <h5 class="product-name"><a href="{% url 'right_product_view' product.uuid %}">{{ item.product.name }}</a></h5>
+                                        <h5 class="product-name"><a href="{% url 'right_product_view' item.product.uuid %}">{{ item.product.name }}</a></h5>
                                         <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
                                         </p>
                                     </td>
