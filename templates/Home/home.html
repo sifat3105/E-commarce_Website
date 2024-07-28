@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-{% endfor %}
+        {% endfor %}
 
     </div>
     <div class="slider-arrow hero-slider-1-arrow"></div>
@@ -137,7 +137,7 @@
         <div class="tab-content wow fadeIn animated" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
-                    {% for product in products|slice:":8" %}
+                    {% for product in products|dictsortreversed:"created_at"|slice:":8" %}
                     <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                         <div class="product-cart-wrap mb-30">
                             <div class="product-img-action-wrap">
@@ -145,12 +145,14 @@
                                     <a href="{% url 'right_product_view' product.uuid %}">
                                         {% if product.image %}
                                         <img class="default-img" src="{{ product.image.url }}" alt="">
-                                        <img class="hover-img" src="{{ product.image.url }}" alt="">
+                                        {% endif %}
+                                        {% if product.image2 %}
+                                        <img class="hover-img" src="{{ product.image2.url }}" alt="">
                                         {% endif %}
                                     </a>
                                 </div>
                                 <div class="product-action-1">
-                                    <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                    <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal{{ product.id }}"><i class="fi-rs-eye"></i></a>
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{% url 'add_to_wishlist' product.id %}"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                 </div>
@@ -163,10 +165,9 @@
                                     <a href="shop-grid-right.html">{{ product.subcategory}}</a>
                                 </div>
                                 <h2><a href="{% url 'right_product_view' product.uuid %}">{{ product.name}}</a></h2>
-                                <div class="rating-result" title="90%">
-                                    <span>
-                                        <span>90%</span>
-                                    </span>
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width:{{product.show_rating}}%">
+                                    </div>
                                 </div>
                                 <div class="product-price">
                                     <span>${{ product.price}} </span>
@@ -187,7 +188,7 @@
 
 {% comment %}              Banner 2               {% endcomment %}
 <section class="banner-2 section-padding pb-0">
-    {% for banner in banners %}
+    {% comment %} {% for banner in banners %} {% endcomment %}
     <div class="container">
         <div class="banner-img banner-big wow fadeIn animated f-none">
             <img src="{{ banner.image.url }}" alt="">
@@ -198,7 +199,7 @@
             </div>
         </div>
     </div>
-    {% endfor %}
+    {% comment %} {% endfor %} {% endcomment %}
 </section>
 
 {% comment %}            Category Slidder               {% endcomment %}

@@ -8,8 +8,8 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.html" rel="nofollow">Home</a>
-                <span></span> Fashion
-                <span></span> Abstract Print Patchwork Dress
+                <span></span> {{ product.category }}
+                <span></span>{{ product.subcategory }}
             </div>
         </div>
     </div>
@@ -104,10 +104,10 @@
                                         </div>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width:90%">
+                                                <div class="product-rating" style="width:{{product.show_rating}}%">
                                                 </div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                            <span class="font-small ml-5 text-muted"> ({{ product.num_reviews }} reviews)</span>
                                         </div>
                                     </div>
                                     <div class="clearfix product-price-cover">
@@ -298,144 +298,122 @@
                                         <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
                                     </ul>
                                 </div>
-                                <h3 class="section-title style-1 mb-30 mt-30">Reviews (3)</h3>
+                                <h3 class="section-title style-1 mb-30 mt-30">Reviews ({{ product.num_reviews }})</h3>
                                 <!--Comments-->
                                 <div class="comments-area style-2">
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <h4 class="mb-30">Customer questions & answers</h4>
                                             <div class="comment-list">
+                                                {% for review in reviews|dictsortreversed:"created_at" %}
                                                 <div class="single-comment justify-content-between d-flex">
                                                     <div class="user justify-content-between d-flex">
                                                         <div class="thumb text-center">
                                                             <img src="assets/imgs/page/avatar-6.jpg" alt="">
-                                                            <h6><a href="#">Jacky Chan</a></h6>
+                                                            <h6><a href="#">{{review.name}}</a></h6>
                                                             <p class="font-xxs">Since 2012</p>
                                                         </div>
                                                         <div class="desc">
                                                             <div class="product-rate d-inline-block">
-                                                                <div class="product-rating" style="width:90%">
+                                                                <div class="product-rating" style="width: {{review.rating}}%">
                                                                 </div>
                                                             </div>
-                                                            <p>Thank you very fast shipping from Poland only 3days.</p>
+                                                            <p>{{review.comment}}.</p>
                                                             <div class="d-flex justify-content-between">
                                                                 <div class="d-flex align-items-center">
-                                                                    <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
+                                                                    <p class="font-xs mr-30">{{review.created_at}} </p>
                                                                     <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--single-comment -->
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/page/avatar-7.jpg" alt="">
-                                                            <h6><a href="#">Ana Rosie</a></h6>
-                                                            <p class="font-xxs">Since 2008</p>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="product-rate d-inline-block">
-                                                                <div class="product-rating" style="width:90%">
-                                                                </div>
-                                                            </div>
-                                                            <p>Great low price and works well.</p>
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="d-flex align-items-center">
-                                                                    <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
-                                                                    <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--single-comment -->
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/page/avatar-8.jpg" alt="">
-                                                            <h6><a href="#">Steven Keny</a></h6>
-                                                            <p class="font-xxs">Since 2010</p>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="product-rate d-inline-block">
-                                                                <div class="product-rating" style="width:90%">
-                                                                </div>
-                                                            </div>
-                                                            <p>Authentic and Beautiful, Love these way more than ever expected They are Great earphones</p>
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="d-flex align-items-center">
-                                                                    <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
-                                                                    <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--single-comment -->
+                                                {% endfor %}
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <h4 class="mb-30">Customer reviews</h4>
                                             <div class="d-flex mb-30">
                                                 <div class="product-rate d-inline-block mr-15">
-                                                    <div class="product-rating" style="width:20%">
+                                                <div class="product-rating" style="width:{{ product.show_rating }}%">
                                                     </div>
                                                 </div>
-                                                <h6>4.8 out of 5</h6>
+                                                <h6>{{ product.rating }} out of 5</h6>
                                             </div>
                                             <div class="progress">
                                                 <span>5 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ star_slider_5 }}%;" aria-valuenow="{{ star_slider_5 }}" aria-valuemin="0" aria-valuemax="100">{{ star_slider_5 }}%</div>
                                             </div>
                                             <div class="progress">
                                                 <span>4 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ star_slider_4 }}%;" aria-valuenow="{{ star_slider_4 }}" aria-valuemin="0" aria-valuemax="100">{{ star_slider_4 }}%</div>
                                             </div>
                                             <div class="progress">
                                                 <span>3 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ star_slider_3 }}%;" aria-valuenow="{{ star_slider_3 }}" aria-valuemin="0" aria-valuemax="100">{{ star_slider_3 }}%</div>
                                             </div>
                                             <div class="progress">
                                                 <span>2 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ star_slider_2 }}%;" aria-valuenow="{{ star_slider_2 }}" aria-valuemin="0" aria-valuemax="100">{{ star_sliderr_2 }}%</div>
                                             </div>
                                             <div class="progress mb-30">
                                                 <span>1 star</span>
-                                                <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: {{ star_slider_1 }}%;" aria-valuenow="{{ star_slider_1 }}" aria-valuemin="0" aria-valuemax="100">{{ star_slider_1 }}%</div>
                                             </div>
                                             <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!--comment form-->
+                                <style>
+                                    .star-rating {
+                                        direction: rtl;
+                                        display: inline-block;
+                                        font-size: 0;
+                                    }
+                                
+                                    .star-rating input {
+                                        display: none;
+                                    }
+                                
+                                    .star-rating label {
+                                        font-size: 2rem;
+                                        color: #ddd;
+                                        cursor: pointer;
+                                    }
+                                
+                                    .star-rating input:checked~label,
+                                    .star-rating input:hover~label,
+                                    .star-rating label:hover~label {
+                                        color: #ffc107;
+                                    }
+                                </style>
                                 <div class="comment-form">
                                     <h4 class="mb-15">Add a review</h4>
-                                    <div class="product-rate d-inline-block mb-30">
-                                    </div>
+                                   
                                     <div class="row">
                                         <div class="col-lg-8 col-md-12">
-                                            <form class="form-contact comment_form" action="#" id="commentForm">
+                                            {% if request.user.is_authenticated %}
+                                            <form method="POST" class="form-contact comment_form" action="#" id="commentForm">
+                                                {% csrf_token %}
                                                 <div class="row">
+                                                    <div class="container mt-5">
+                                                        <div class="star-rating" >
+                                                            <input type="radio" id="star5" name="rating" value="100" required/>
+                                                            <label for="star5" title="5 stars">&#9733;</label>
+                                                            <input type="radio" id="star4" name="rating" value="80" />
+                                                            <label for="star4" title="4 stars">&#9733;</label>
+                                                            <input type="radio" id="star3" name="rating" value="60" />
+                                                            <label for="star3" title="3 stars">&#9733;</label>
+                                                            <input type="radio" id="star2" name="rating" value="40" />
+                                                            <label for="star2" title="2 stars">&#9733;</label>
+                                                            <input type="radio" id="star1" name="rating" value="20" />
+                                                            <label for="star1" title="1 star">&#9733;</label>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -444,6 +422,7 @@
                                                         Review</button>
                                                 </div>
                                             </form>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

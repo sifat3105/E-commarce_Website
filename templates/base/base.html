@@ -29,10 +29,12 @@
 
 
 {% endblock pop_up_offer%}
-    
-<div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+
+
+{% for product in products %}
+<div class="modal fade custom-modal" id="quickViewModal{{ product.id }}" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">              
+        <div class="modal-content">              
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>       
             <div class="modal-body">
                 <div class="row">
@@ -42,36 +44,69 @@
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
                                 <figure class="border-radius-10">
+                                    {% if product.image %}
                                     <img src="{{ product.image.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-1.jpg' %}" alt="product image">
+                                    {% if product.image2 %}
+                                    <img src="{{ product.image2.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-3.jpg' %}" alt="product image">
+                                    {% if product.image3 %}
+                                    <img src="{{ product.image3.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-4.jpg' %}" alt="product image">
+                                    {% if product.image4 %}
+                                    <img src="{{ product.image4.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-5.jpg' %}" alt="product image">
+                                    {% if product.image5 %}
+                                    <img src="{{ product.image5.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-6.jpg' %}" alt="product image">
+                                    {% if product.image6 %}
+                                    <img src="{{ product.image6.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="{% static 'assets/imgs/shop/product-16-7.jpg' %}" alt="product image">
+                                    {% if product.image7 %}
+                                    <img src="{{ product.image7.url }}" alt="product image">
+                                    {% endif %}
                                 </figure>
+                                
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails pl-15 pr-15">
                                 <div><img src="{{ product.image.url }}" alt="product image"></div>
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-4.jpg' %}" alt="product image"></div>
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-5.jpg' %}" alt="product image"></div>
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-6.jpg' %}" alt="product image"></div>
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-7.jpg' %}" alt="product image"></div>
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-8.jpg' %}" alt="product image"></div>
-                                <div><img src="{% static 'assets/imgs/shop/thumbnail-9.jpg' %}" alt="product image"></div>
+                                        
+                                        {% if product.image2 %}
+                                        <div><img src="{{ product.image2.url }}" alt="product image"></div>
+                                        {% endif %}
+                                        
+                                        {% if product.image3 %}
+                                        <div><img src="{{ product.image3.url }}" alt="product image"></div>
+                                        {% endif %}
+                                        
+                                        {% if product.image4 %}
+                                        <div><img src="{{ product.image4.url }}" alt="product image"></div>
+                                        {% endif %}
+                                        
+                                        {% if product.image5 %}
+                                        <div><img src="{{ product.image5.url }}" alt="product image"></div>
+                                        {% endif %}
+                                        
+                                        {% if product.image6 %}
+                                        <div><img src="{{ product.image6.url }}" alt="product image"></div>
+                                        {% endif %}
+                                        
+                                        {% if product.image7 %}
+                                        <div><img src="{{ product.image7.url }}" alt="product image"></div>
+                                        {% endif %}
                             </div>
                         </div>
                         <!-- End Gallery -->
@@ -157,10 +192,10 @@
                     </div>
                 </div>
             </div>        
-    </div>
+        </div>
     </div>
 </div>
-
+{% endfor %}
 
 
     
@@ -493,7 +528,7 @@
                                             </li>
                                             <li><a href="shop-filter.html">Shop – Filter</a></li>
                                             <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                            <li><a href="shop-cart.html">Shop – Cart</a></li>
+                                            <li><a href="{% url 'cart' %}">Shop – Cart</a></li>
                                             <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                             <li><a href="shop-compare.html">Shop – Compare</a></li>
                                         </ul>
@@ -602,7 +637,7 @@
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="{% url 'cart' %}">
                                     <img alt="Evara" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}">
                                     <span class="pro-count white">2</span>
                                 </a>
@@ -638,7 +673,7 @@
                                             <h4>Total <span>$383.00</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="shop-cart.html">View cart</a>
+                                            <a href="{% url 'cart' %}">View cart</a>
                                             <a href="shop-checkout.html">Checkout</a>
                                         </div>
                                     </div>
@@ -723,7 +758,7 @@
                                     </li>
                                     <li><a href="shop-filter.html">Shop – Filter</a></li>
                                     <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                    <li><a href="shop-cart.html">Shop – Cart</a></li>
+                                    <li><a href="{% url 'cart' %}">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                     <li><a href="shop-compare.html">Shop – Compare</a></li>
                                 </ul>
@@ -932,7 +967,7 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        Designed by <a href="http://alithemes.com" target="_blank">Alithemes.com</a>. All rights reserved
+                        Designed by <a href="#" target="_blank">Alithemes.com</a>. All rights reserved
                     </p>
                 </div>
             </div>

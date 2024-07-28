@@ -2,13 +2,13 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-def convert_to_16_9(image_file):
+def convert_image_size(image_file,w_ratio,h_ratio):
     with Image.open(image_file) as img:
         # Original dimensions
         original_width, original_height = img.size
         
         # Desired aspect ratio
-        target_aspect_ratio = 10 / 9
+        target_aspect_ratio = w_ratio / h_ratio
         
         # Calculate new dimensions
         original_aspect_ratio = original_width / original_height

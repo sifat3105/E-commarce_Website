@@ -123,7 +123,7 @@ def login_register_view(request):
         # log_status = True
         username = request.POST.get('username_l')
         password = request.POST.get('password_l')
-        user = authenticate(username=username, password=password)                                                                                                                                                                                                       
+        user = authenticate(username=username, password=password)                                                                                                                                               
         if user:
             login(request, user)
             return redirect('home')    

@@ -10,6 +10,7 @@ urlpatterns = [
     path('create/featured_brand/', featured_brand_create_view, name='create_featured_brand'),
     path('success/', success_view, name='success'),
     path('creation/dashboard/view/', creation_dashboard_view, name='creation_dashboard_view'),
+    path('submit_review',submit_review, name='submit_review')
 ]
 
 from django.conf import settings

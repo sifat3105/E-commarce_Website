@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from .utils import convert_image_size
 
 
 class Category(models.Model):
@@ -44,25 +45,43 @@ class Product(models.Model):
     image7 = models.ImageField(upload_to='products/', blank=True, null=True)
     rating = models.PositiveIntegerField( null=True, blank=True)
     num_reviews = models.PositiveIntegerField(default=0)
+    show_rating = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    def discount_percentage(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         if self.old_price != 0:
             discount = self.old_price - self.price
             self.discount = round((discount / self.old_price) * 100)
         else:
             self.discount = 0
+            
+        try:
+            self.image = convert_image_size(self.image, 10, 9)
+            self.image2 = convert_image_size(self.image2, 10, 9)
+            self.image3 = convert_image_size(self.image3, 10, 9)
+            self.image4 = convert_image_size(self.image4, 10, 9)
+            self.image5 = convert_image_size(self.image5, 10, 9)
+            self.image6 = convert_image_size(self.image6, 10, 9)
+            self.image7 = convert_image_size(self.image7, 10, 9)
+        except:
+            None
         super().save(*args, **kwargs)
         
-    def save(self, *args, **kwargs):
-        rate = 5-
-        super().save(*args, **kwargs)
-
-
     def __str__(self):
         return self.name
-
+    
+    
+class Reviews(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    comment = models.TextField(blank=True, null=True)
+    rating = models.PositiveIntegerField( null=True, blank=True)
+    reply = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.name}'s Reviews: {self.comment}"
     
 class Banner(models.Model):
     title_small = models.CharField(max_length=255, help_text="Small title above main title")
@@ -70,6 +89,11 @@ class Banner(models.Model):
     image = models.ImageField(upload_to='banners/', help_text="Image for the banner")
     button_text = models.CharField(max_length=100, help_text="Text displayed on the button")
     button_link = models.URLField(max_length=200, help_text="URL that the button links to")
+    
+    def save(self, *args, **kwargs):
+        img = convert_image_size(self.image, 13, 3)
+        self.image = img
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return self.title_large
