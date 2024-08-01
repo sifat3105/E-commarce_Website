@@ -279,7 +279,9 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="{% url 'cart' %}">
                                         <img alt="Evara" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}">
+                                        {% if total_cart_item %}
                                         <span class="pro-count blue">{{total_cart_item}}</span>
+                                        {% endif %}
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>

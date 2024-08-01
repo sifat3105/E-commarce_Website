@@ -8,6 +8,8 @@ from .models import profile, forget_otp
 import random, re
 from django.conf import settings
 from django.utils.html import escape
+from sslcommerz_lib import SSLCOMMERZ 
+from cart_and_check_out.models import CartItem
 
 
 
@@ -243,3 +245,45 @@ def reset_password(request):
             messages.warning(request, 'New Password and confirm Confirm Password does not match.')
                 
     return render(request, 'account/account_dashboard.html')
+
+def ssl_commarce(request):
+    user = request.user
+    cartProd = [p for p in CartItem.objects.all() if p.cart.user == user]
+    if cartProd:
+        shipping_cost = 100
+        total = 0
+        for p in cartProd:
+            totalAmount = (p.quantity) * (p.product.price)
+            total += totalAmount
+            totalwithSHipping = total + shipping_cost
+   
+    sslcz = SSLCOMMERZ({'store_id': 'niyam6412dc52e1e89', 'store_pass': 'niyam6412dc52e1e89@ssl', 'issandbox': True})
+    total_amount = request.GET.get('totalwithSHipping')
+    print(total_amount)
+
+    data = {
+        'total_amount': totalwithSHipping,
+        'currency': "BDT",
+        'tran_id': "tran_12345",
+        'success_url': "http://127.0.0.1:8000/payment/success/",
+        # if transaction is succesful, user will be redirected here
+        'fail_url': "http://127.0.0.1:8000/payment/fail/",  # if transaction is failed, user will be redirected here
+        # 'cancel_url': "http://127.0.0.1:8000/payment-cancelled",
+        # after user cancels the transaction, will be redirected here
+        'emi_option': "0",
+        'cus_name': user.get_full_name() or "Anonymous", 
+        'cus_email': user.email or "test@test.com", 
+        'cus_phone': "01700000000", # Replace with user's phone number 
+        'cus_add1': "customer address", 
+        'cus_city': "Dhaka", 
+        'cus_country': "Bangladesh", 
+        'shipping_method': "NO", 
+        'multi_card_name': "", 
+        'num_of_item': len(cartProd), 
+        'product_name': ", ".join(p.product.name for p in cartProd), 
+        'product_category': ", ".join(p.product.category.name for p in cartProd),
+        'product_profile': "general",
+    }
+    # response = sslcommez.createSession(post_body)
+    response = sslcz.createSession(data)
+    return redirect(response['GatewayPageURL'])
