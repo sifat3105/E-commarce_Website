@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from Product.models import Product
 from django.utils import timezone
+from Account_Dashboard.models import ShippingAddress
 # Create your models here.
 
 class Cart(models.Model):
@@ -32,3 +33,26 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s wishlist item: {self.product.name}"
+    
+class OrderConfirm(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    shipping = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE)
+    created = models.DateTimeField(default=timezone.now)
+
+
+    def __str__(self):
+        return f"{self.user.username}'s  Orders"
+
+class OrderProduct(models.Model):
+    order_confirm = models.ForeignKey(OrderConfirm, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return f"{self.order_confirm.user.username}'s order product: {self.product.name}"
+   
+    
+    
+
+    

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import login,authenticate, get_user_model, update_session_auth_hash, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -7,9 +8,13 @@ from .models import profile, forget_otp
 # from .middlewares import verified_user, not_verified_user
 import random, re
 from django.conf import settings
+from django.urls import reverse
 from django.utils.html import escape
 from sslcommerz_lib import SSLCOMMERZ 
 from cart_and_check_out.models import CartItem
+from Account_Dashboard.models import ShippingAddress
+from Product.models import Product
+from cart_and_check_out.models import OrderProduct,OrderConfirm
 
 
 
@@ -265,9 +270,9 @@ def ssl_commarce(request):
         'total_amount': totalwithSHipping,
         'currency': "BDT",
         'tran_id': "tran_12345",
-        'success_url': "http://127.0.0.1:8000/payment/success/",
+        'success_url': "http://127.0.0.1:8000/auth/success/",
         # if transaction is succesful, user will be redirected here
-        'fail_url': "http://127.0.0.1:8000/payment/fail/",  # if transaction is failed, user will be redirected here
+        'fail_url': "http://127.0.0.1:8000/auth/fail/",  # if transaction is failed, user will be redirected here
         # 'cancel_url': "http://127.0.0.1:8000/payment-cancelled",
         # after user cancels the transaction, will be redirected here
         'emi_option': "0",
@@ -287,3 +292,29 @@ def ssl_commarce(request):
     # response = sslcommez.createSession(post_body)
     response = sslcz.createSession(data)
     return redirect(response['GatewayPageURL'])
+
+def order_success(request):
+    user = request.user
+    address = get_object_or_404(ShippingAddress, user=user)
+    
+    order_confirm, created = OrderConfirm.objects.get_or_create(user=user, shipping=address)
+    
+    cart_products = CartItem.objects.filter(cart__user=user)
+    
+    for cart_product in cart_products:
+        item_id = cart_product.id
+        order_prod, created = OrderProduct.objects.get_or_create(
+            order_confirm=order_confirm,
+            product=cart_product.product,
+        )
+        if not created:
+            order_prod.quantity += 1
+        else:
+            order_prod.quantity = cart_product.quantity
+        order_prod.save()
+        cart_product.delete()
+    
+    return render(request, 'order_success.html')
+
+def oder_fail(request):
+    return render(request, 'oder_fail.html')

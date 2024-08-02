@@ -62,3 +62,4 @@ def add_to_wishlist(request, product_id):
 def wishlist(request):
     wishlist_items = Wishlist.objects.filter(user=request.user)
     return render(request, 'cart/wishlist.html', {'wishlist_items': wishlist_items})
+
